@@ -1,0 +1,75 @@
+package com.webcam.java;
+
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
+
+public class Main {
+    static Webcam webcam = Webcam.getDefault();
+
+    public static void main(String[] str) {
+        // Load the image for the button icon
+        JButton captureButton = new JButton( new ImageIcon("C:/Users/siddi/eclipse-workspace/Webcam/src/com/webcam/java/capture.png"));
+        
+      
+
+        webcam.setViewSize(WebcamResolution.VGA.getSize());
+        webcam.open();
+
+        WebcamPanel webcamPanel = new WebcamPanel(webcam);
+        webcamPanel.setMirrored(true);
+
+        JFrame frame = new JFrame("WebCam by SIddiq");
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+        panel.add(captureButton);
+
+        frame.add(webcamPanel, BorderLayout.CENTER);
+        frame.add(panel, BorderLayout.EAST);
+        frame.pack();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
+        captureButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setDialogTitle("Save File");
+                BufferedImage image = webcam.getImage();
+
+                // Format the date to avoid special characters in the filename
+                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                fileChooser.setSelectedFile(new File("Image_" + timeStamp + ".jpg"));
+
+                int userSelection = fileChooser.showSaveDialog(null);
+
+                if (userSelection == JFileChooser.APPROVE_OPTION) {
+                    File fileToSave = fileChooser.getSelectedFile();
+
+                    try {
+                        // Save the captured image to the selected file location
+                        ImageIO.write(image, "JPG", fileToSave);
+                        System.out.println("File saved: " + fileToSave.getAbsolutePath());
+
+                    } catch (WebcamException e1) {
+                        e1.printStackTrace();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+}

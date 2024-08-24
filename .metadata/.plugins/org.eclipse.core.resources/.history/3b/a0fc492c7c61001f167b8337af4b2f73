@@ -1,0 +1,71 @@
+package com.webcam.java;
+
+import javax.imageio.ImageIO;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+
+import com.github.sarxos.webcam.*;
+
+public class Main {
+	static JLabel i = new JLabel();
+	static Webcam webcam = Webcam.getDefault();
+	public static void main(String[] str) throws IOException {
+		
+		JButton b = new JButton();
+		b.setIcon();
+		
+		
+		webcam.setViewSize(WebcamResolution.VGA.getSize());
+		webcam.open();	
+		WebcamPanel wp = new WebcamPanel(webcam);
+		wp.setMirrored(true);
+		JFrame f = new JFrame("WebCam by SIddiq");
+		JPanel p = new JPanel();
+		p.setLayout(new FlowLayout());
+		p.add(b);
+		f.setVisible(true);
+		
+		f.add(wp,BorderLayout.CENTER);
+		f.add(p,BorderLayout.EAST);
+		f.pack();
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		b.addActionListener(new ActionListener() {
+			  @Override
+			    public void actionPerformed(ActionEvent e) {
+			        JFileChooser fileChooser = new JFileChooser();
+			        fileChooser.setDialogTitle("Save File");
+			        BufferedImage image = webcam.getImage();
+			        // Format the date to avoid special characters in the filename
+			        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+			        fileChooser.setSelectedFile(new File("Image_" + timeStamp + ".jpg"));
+			        
+			        int userSelection = fileChooser.showSaveDialog(null);
+
+			        if (userSelection == JFileChooser.APPROVE_OPTION) {
+			            File fileToSave = fileChooser.getSelectedFile();
+
+			            try {
+			                // Save the captured image to the selected file location
+			                ImageIO.write(image, "JPG", fileToSave);
+			                System.out.println("File saved: " + fileToSave.getAbsolutePath());
+			              
+			            } catch (WebcamException e1) {
+			                e1.printStackTrace();
+			            } catch (IOException e1) {
+			                e1.printStackTrace();
+			            }
+			        }
+			    }
+		}); 
+		
+		
+		}
+	 
+}

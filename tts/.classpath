@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-22">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="lib" path="C:/Users/siddi/Desktop/coding/Desktop Assistant/lib/Client.jar"/>
+	<classpathentry kind="lib" path="C:/Users/siddi/Desktop/coding/Desktop Assistant/lib/cmu_time_awb.jar"/>
+	<classpathentry kind="lib" path="C:/Users/siddi/Desktop/coding/Desktop Assistant/lib/cmu_us_kal.jar"/>
+	<classpathentry kind="lib" path="C:/Users/siddi/Desktop/coding/Desktop Assistant/lib/cmudict04.jar"/>
+	<classpathentry kind="lib" path="C:/Users/siddi/Desktop/coding/Desktop Assistant/lib/cmulex.jar"/>
+	<classpathentry kind="lib" path="C:/Users/siddi/Desktop/coding/Desktop Assistant/lib/cmutimelex.jar"/>
+	<classpathentry kind="lib" path="C:/Users/siddi/Desktop/coding/Desktop Assistant/lib/EmacspeakServer.jar"/>
+	<classpathentry kind="lib" path="C:/Users/siddi/Desktop/coding/Desktop Assistant/lib/en_us.jar"/>
+	<classpathentry kind="lib" path="C:/Users/siddi/Desktop/coding/Desktop Assistant/lib/freetts.jar"/>
+	<classpathentry kind="lib" path="C:/Users/siddi/Desktop/coding/Desktop Assistant/lib/freetts-jsapi10.jar"/>
+	<classpathentry kind="lib" path="C:/Users/siddi/Desktop/coding/Desktop Assistant/lib/mbrola.jar"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
